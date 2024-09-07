@@ -36,6 +36,9 @@ export default function App() {
     if (symbols) {
       characterList += symbols;
     }
+    const passwordResult = createPassword(characterList, passwordLength);
+    setPassword(passwordResult);
+    setIsPassGenerated(true);
   };
 
   const createPassword = (characters: string, passwordLength: number) => {
@@ -46,7 +49,14 @@ export default function App() {
     }
     return result;
   };
-  const resetPasswordState = () => {};
+  const resetPasswordState = () => {
+    setPassword('');
+    setIsPassGenerated(false);
+    setLowerCase(true);
+    setUpperCase(false);
+    setNumbers(false);
+    setSymbols(false);
+  };
 
   return (
     <View>
