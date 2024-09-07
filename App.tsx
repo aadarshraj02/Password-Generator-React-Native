@@ -25,16 +25,16 @@ export default function App() {
     const specialChars = '!@#$&%*()+_-';
 
     if (upperCase) {
-      characterList += upperCase;
+      characterList += upperCaseChars;
     }
     if (lowerCase) {
-      characterList += lowerCase;
+      characterList += lowerCaseChars;
     }
     if (numbers) {
-      characterList += numbers;
+      characterList += digitChars;
     }
     if (symbols) {
-      characterList += symbols;
+      characterList += specialChars;
     }
     const passwordResult = createPassword(characterList, passwordLength);
     setPassword(passwordResult);
