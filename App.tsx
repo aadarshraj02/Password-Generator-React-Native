@@ -12,12 +12,14 @@ import React, {useState} from 'react';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import * as Yup from 'yup';
 import {Formik} from 'formik';
+
 const PasswordSchema = Yup.object({
   passwordLength: Yup.number()
     .min(4, 'Should be min of 4 characters')
     .max(16, 'Should be max of 16 characters')
     .required('Length is required'),
 });
+
 export default function App() {
   const [password, setPassword] = useState('');
   const [isPassGenerated, setIsPassGenerated] = useState(false);
@@ -57,7 +59,7 @@ export default function App() {
   const createPassword = (characters: string, passwordLength: number) => {
     let result = '';
     for (let i = 0; i < passwordLength; i++) {
-      const characterIndex = Math.round(Math.random() * characters.length);
+      const characterIndex = Math.floor(Math.random() * characters.length);
       result += characters.charAt(characterIndex);
     }
     return result;
@@ -81,7 +83,6 @@ export default function App() {
             initialValues={{passwordLength: ''}}
             validationSchema={PasswordSchema}
             onSubmit={values => {
-              console.log(values);
               generatePasswordString(+values.passwordLength);
             }}>
             {({
@@ -208,9 +209,9 @@ const styles = StyleSheet.create({
   },
   inputWrapper: {
     marginBottom: 15,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    flexDirection: 'row',
   },
   inputColumn: {
     flexDirection: 'column',
