@@ -17,6 +17,10 @@ export default function App() {
   const [numbers, setNumbers] = useState(false);
   const [symbols, setSymbols] = useState(false);
 
+  const generatePassword = (passwordLength: number) => {};
+  const createPassword = (characters: string, passwordLength: number) => {};
+  const resetPasswordState = () => {};
+
   return (
     <View>
       <Text>App</Text>
