@@ -49,6 +49,7 @@ export default function App() {
     }
     return result;
   };
+
   const resetPasswordState = () => {
     setPassword('');
     setIsPassGenerated(false);
