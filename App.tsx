@@ -1,6 +1,16 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
 import * as Yup from 'yup';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import {Formik} from 'formik';
 
 const PasswordSchema = Yup.object().shape({
   passwordLength: Yup.number()
@@ -60,9 +70,55 @@ export default function App() {
   };
 
   return (
-    <View>
-      <Text>App</Text>
-    </View>
+    <ScrollView keyboardShouldPersistTaps="handled">
+      <SafeAreaView style={styles.appContainer}>
+        <View style={styles.formContainer}>
+          <Text style={styles.title}>Password Generator</Text>
+          <Formik
+            initialValues={{passwordLength: ''}}
+            validationSchema={PasswordSchema}
+            onSubmit={values => {
+              generatePassword(+values.passwordLength);
+            }}>
+            {({
+              values,
+              errors,
+              touched,
+              isValid,
+              handleChange,
+              handleSubmit,
+              handleReset,
+            }) => (
+              <>
+                <View style={styles.inputWrapper}>
+                  <View style={styles.inputColumn}>
+                    <TextInput
+                      style={styles.inputStyle}
+                      value={values.passwordLength}
+                      onChangeText={handleChange('passwordLength')}
+                      placeholder="Ex. 8"
+                      keyboardType="numeric"
+                    />
+                  </View>
+                </View>
+                <View style={styles.inputWrapper}></View>
+                <View style={styles.inputWrapper}></View>
+                <View style={styles.inputWrapper}></View>
+                <View style={styles.inputWrapper}></View>
+                <View style={styles.formActions}>
+                  <TouchableOpacity>
+                    <Text>Generate Password</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Text>Reset</Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            )}
+          </Formik>
+        </View>
+      </SafeAreaView>
+    </ScrollView>
   );
 }
 
