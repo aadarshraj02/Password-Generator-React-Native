@@ -92,14 +92,20 @@ export default function App() {
               <>
                 <View style={styles.inputWrapper}>
                   <View style={styles.inputColumn}>
-                    <TextInput
-                      style={styles.inputStyle}
-                      value={values.passwordLength}
-                      onChangeText={handleChange('passwordLength')}
-                      placeholder="Ex. 8"
-                      keyboardType="numeric"
-                    />
+                    <Text style={styles.heading}>Password Length</Text>
+                    {touched.passwordLength && errors.passwordLength && (
+                      <Text style={styles.errorText}>
+                        {errors.passwordLength}
+                      </Text>
+                    )}
                   </View>
+                  <TextInput
+                    style={styles.inputStyle}
+                    value={values.passwordLength}
+                    onChangeText={handleChange('passwordLength')}
+                    placeholder="Ex. 8"
+                    keyboardType="numeric"
+                  />
                 </View>
                 <View style={styles.inputWrapper}></View>
                 <View style={styles.inputWrapper}></View>
